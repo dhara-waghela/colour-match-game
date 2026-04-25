@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Colour Match</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Verdana', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        .box1 {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 16px;
+            width: 320px;
+            margin: auto;
+        }
+
+        .box {
+            width: 120px;
+            height: 120px;
+            margin: 15px auto;
+            border-radius: 12px;
+            border: 3px solid #334155;
+        }
+
+        /* sliders */
+        input[type=range] {
+            width: 80%;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #3b82f6;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Match the Colour</h2>
+    <div class="box1">
+        <p>Target :</p>
+        <div id="target" class="box"></div>
+        <p>Your Colour :</p>
+        <div id="user" class="box"></div>
+
+        R: <input type="range" min="0" max="255" id="r"><br><br>
+        G: <input type="range" min="0" max="255" id="g"><br><br>
+        B: <input type="range" min="0" max="255" id="b"><br><br>
+        <h3>Accuracy: <span id="acc">0%</span></h3>
+    </div>
+
+    <script>
+        // random color
+        function randomColor() {
+            return {
+                r: Math.floor(Math.random() * 256),
+                g: Math.floor(Math.random() * 256),
+                b: Math.floor(Math.random() * 256)
+            };
+        }
+
+        let target = randomColor();
+
+        //target
+        document.getElementById("target").style.background =
+            `rgb(${target.r},${target.g},${target.b})`;
+
+        // update color live (dynamic)
+        function updateColor() {
+            let r = document.getElementById("r").value;
+            let g = document.getElementById("g").value;
+            let b = document.getElementById("b").value;
+
+            document.getElementById("user").style.background =
+                `rgb(${r},${g},${b})`;
+            check();
+        }
+
+        // updating color on slider change
+        document.getElementById("r").oninput = updateColor;
+        document.getElementById("g").oninput = updateColor;
+        document.getElementById("b").oninput = updateColor;
+
+        // accuracy
+        function check() {
+
+            let r = document.getElementById("r").value;
+            let g = document.getElementById("g").value;
+            let b = document.getElementById("b").value;
+
+            let diff = Math.abs(target.r - r) +
+                Math.abs(target.g - g) +
+                Math.abs(target.b - b);
+
+            let maxDiff = 255 * 3;
+
+            let accuracy = ((1 - diff / maxDiff) * 100).toFixed(2);
+
+            document.getElementById("acc").innerText = accuracy + "%";
+        }
+    </script>
+</body>
+</html>
