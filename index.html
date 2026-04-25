@@ -1,64 +1,128 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Colour Match</title>
+    <title>Colour-Match</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
+            margin: 0;
+            padding: 15px;
             text-align: center;
-            font-family: 'Verdana', sans-serif;
+            font-family: Verdana, sans-serif;
             background: #0f172a;
             color: #e2e8f0;
         }
 
+        h2 {
+            margin-bottom: 10px;
+            font-size: 30px;
+        }
+
         .box1 {
             background: #1e293b;
-            padding: 20px;
+            padding: 25px;
             border-radius: 16px;
-            width: 320px;
+            width: 90%;
+            max-width: 420px;
             margin: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .3);
         }
 
         .box {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             margin: 15px auto;
             border-radius: 12px;
             border: 3px solid #334155;
         }
 
-        /* sliders */
-        input[type=range] {
-            width: 80%;
+        .slider-row {
+            margin: 18px 0;
+            text-align: left;
         }
 
-        button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-            background: #3b82f6;
-            color: white;
+        .slider-row label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type=range] {
+            width: 100%;
             cursor: pointer;
+        }
+
+        h3 {
+            margin-top: 25px;
+            font-size: 24px;
+        }
+
+        /* mobile */
+        @media(max-width:500px) {
+
+            body {
+                padding: 12px;
+            }
+
+            h2 {
+                font-size: 26px;
+            }
+
+            .box1 {
+                width: 100%;
+                padding: 18px;
+            }
+
+            .box {
+                width: 100px;
+                height: 100px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 
 <body>
+
     <h2>Match the Colour</h2>
+
     <div class="box1">
+
         <p>Target :</p>
         <div id="target" class="box"></div>
+
         <p>Your Colour :</p>
         <div id="user" class="box"></div>
 
-        R: <input type="range" min="0" max="255" id="r"><br><br>
-        G: <input type="range" min="0" max="255" id="g"><br><br>
-        B: <input type="range" min="0" max="255" id="b"><br><br>
+        <div class="slider-row">
+            <label>Red</label>
+            <input type="range" min="0" max="255" id="r">
+        </div>
+
+        <div class="slider-row">
+            <label>Green</label>
+            <input type="range" min="0" max="255" id="g">
+        </div>
+
+        <div class="slider-row">
+            <label>Blue</label>
+            <input type="range" min="0" max="255" id="b">
+        </div>
+
         <h3>Accuracy: <span id="acc">0%</span></h3>
+
     </div>
 
     <script>
-        // random color
         function randomColor() {
             return {
                 r: Math.floor(Math.random() * 256),
@@ -69,43 +133,42 @@
 
         let target = randomColor();
 
-        //target
         document.getElementById("target").style.background =
             `rgb(${target.r},${target.g},${target.b})`;
 
-        // update color live (dynamic)
         function updateColor() {
+
             let r = document.getElementById("r").value;
             let g = document.getElementById("g").value;
             let b = document.getElementById("b").value;
 
             document.getElementById("user").style.background =
                 `rgb(${r},${g},${b})`;
+
             check();
         }
 
-        // updating color on slider change
         document.getElementById("r").oninput = updateColor;
         document.getElementById("g").oninput = updateColor;
         document.getElementById("b").oninput = updateColor;
 
-        // accuracy
         function check() {
 
             let r = document.getElementById("r").value;
             let g = document.getElementById("g").value;
             let b = document.getElementById("b").value;
 
-            let diff = Math.abs(target.r - r) +
+            let diff =
+                Math.abs(target.r - r) +
                 Math.abs(target.g - g) +
                 Math.abs(target.b - b);
 
-            let maxDiff = 255 * 3;
-
-            let accuracy = ((1 - diff / maxDiff) * 100).toFixed(2);
+            let accuracy = ((1 - diff / (255 * 3)) * 100).toFixed(2);
 
             document.getElementById("acc").innerText = accuracy + "%";
         }
     </script>
+
 </body>
+
 </html>
