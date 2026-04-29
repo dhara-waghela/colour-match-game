@@ -54,14 +54,21 @@ h3{
     margin-top:25px;
     font-size:24px;
 }
-.on{
-    padding: 12px 20px;
+.on {
+    padding: 10px 18px;
     font-size: 16px;
-    color: white;
-    background: #111;
-    border: 2px solid transparent;
-    border-radius: 8px;
+    border: 2px solid #333;
+    background: transparent;
+    color: #333;
+    border-radius: 6px;
+
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.on:hover {
+    background: #333;
+    color: #fff;
 }
 
 @media(max-width:500px){
