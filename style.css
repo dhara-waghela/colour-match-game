@@ -58,7 +58,7 @@ input[type=range]{
 .on{
     padding: 12px 20px;
     font-size: 16px;
-    background:#0f172a;
+    background-color: #333;
     color: white;
     border: none;
     border-radius: 15px;
