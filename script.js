@@ -6,10 +6,17 @@ function randomColor(){
     };
 }
 
-let target = randomColor();
+function setNewTarget() {
+    target = randomColor();
 
-document.getElementById("target").style.background =
-`rgb(${target.r},${target.g},${target.b})`;
+    document.getElementById("target").style.background =
+        `rgb(${target.r}, ${target.g}, ${target.b})`;
+
+    updateColor(); //recommended
+}
+
+let target;
+setNewTarget();
 
 function updateColor(){
 
@@ -46,3 +53,5 @@ function check(){
 }
 
 updateColor();
+
+document.getElementById("newbtn").addEventListener("click", setNewTarget);
