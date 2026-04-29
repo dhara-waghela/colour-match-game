@@ -68,7 +68,7 @@ h3{
 
 .on:active {
     transform: translateY(3px);
-    box-shadow: 0 2px #c94c4c;
+    box-shadow: 0 2px #eee;
 }
 
 @media(max-width:500px){
