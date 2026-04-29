@@ -54,7 +54,12 @@ h3{
     margin-top:25px;
     font-size:24px;
 }
-
+button {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    color: #333;
+    border: 1px solid rgba(255,255,255,0.3);
+}
 @media(max-width:500px){
 
     body{
