@@ -11,9 +11,9 @@ body{
     color:#e2e8f0;
 }
 
-h2{
+h4{
     margin-bottom:25px;
-    font-size:32px;
+    font-size:20px;
 }
 
 .box1{
@@ -50,10 +50,10 @@ input[type=range]{
     cursor:pointer;
 }
 
-h3{
+/* h3{
     margin-top:20px;
     font-size:23px;
-}
+} */
 .on{
     padding: 12px 20px;
     font-size: 16px;
